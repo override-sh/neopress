@@ -2,70 +2,66 @@
 <img src="_assets/logo.png">
 </a>
 
-## Start the app
+## Introduction
 
-To start the development server run `nx serve neopress`. Open your browser and navigate to http://localhost:4200/. Happy
-coding!
+NeoPress is a full-stack content management system (CMS) built with Next.js and Nx, offering a powerful and
+user-friendly solution for managing your website content. Designed with extensibility, security, and performance in
+mind, NeoPress empowers you to create and maintain dynamic websites with ease.
 
-## Generate code
+## Features
 
-If you happen to use Nx plugins, you can leverage code generators that might come with it.
+Integrated UI: Manage content directly within the intuitive browser-based interface, eliminating the need for separate
+headless CMS solutions.
 
-Run `nx list` to get a list of available plugins and whether they have generators. Then run `nx list <plugin-name>` to
-see what generators are available.
+* **Next.js framework**: Leverage the robust features and performance optimization of Next.js for a seamless user
+  experience.
+* **Nx monorepo management**: Efficiently manage the entire codebase, including frontend, backend, and shared
+  components, within a single workspace.
+* **Extensible architecture**: Easily extend NeoPress functionality through plugins and custom modules, tailoring it to
+  your specific needs.
+* **Robust security**: Built with security best practices in mind to protect your content and user data.
+* **Performance-focused**: Optimized for speed and scalability, ensuring a smooth experience for your website visitors.
 
-Learn more about [Nx generators on the docs](https://nx.dev/features/generate-code).
+## Getting Started
 
-## Running tasks
+### Prerequisites
 
-To execute tasks with Nx use the following syntax:
+* [Node.js](https://nodejs.org/en/download/) version 20.x or newer:
+    * When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+    * We recommend using [NVM](https://github.com/nvm-sh/nvm) to manage your Node.js versions.
+* [PNPM](https://pnpm.io/installation) version 8.x or newer globally installed:
+    * `npm install -g pnpm`
+* [NX](https://nx.dev/) globally installed:
+    * `pnpm install -g nx@latest`
+* A strong foundation in JavaScript and TypeScript:
+    * We recommend reading [The Modern JavaScript Tutorial](https://javascript.info/)
+      and [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html).
+    * This project uses [ESLint](https://eslint.org/) to enforce code quality and consistency.
 
+### Installation
+
+1) Clone the NeoPress repository
+
+```bash
+git clone https://github.com/your-username/neopress.git
 ```
-nx <target> <project> <...options>
+
+2) Navigate to the project directory and install the dependencies
+
+```bash:
+cd neopress
+pnpm install
 ```
 
-You can also run multiple targets:
+### Development
 
-```
-nx run-many -t <target1> <target2>
-```
+1) Start the development server:
 
-..or add `-p` to filter specific projects
-
-```
-nx run-many -t <target1> <target2> -p <proj1> <proj2>
+```bash
+nx run neopress:serve
 ```
 
-Targets can be defined in the `package.json` or `projects.json`. Learn
-more [in the docs](https://nx.dev/features/run-tasks).
+This will start the Next.js development server and the Nx workspace, allowing you to work on different parts of the
+project simultaneously.
 
-## Want better Editor Integration?
-
-Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for
-exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
-
-## Ready to deploy?
-
-Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready
-to be deployed.
-
-## Set up CI!
-
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
-
-- [Set up remote caching](https://nx.dev/features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
-
-## Explore the Project Graph
-
-Run `nx graph` to show the graph of the workspace.
-It will show tasks that you can run with Nx.
-
-- [Learn more about Exploring the Project Graph](https://nx.dev/core-features/explore-graph)
-
-## Connect with us!
-
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
+2) Access the CMS UI in your browser navigating to [http://localhost:3000](http://localhost:3000)
