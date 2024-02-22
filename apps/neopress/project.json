@@ -1,8 +1,50 @@
 {
-  "name": "neopress",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/neopress",
-  "projectType": "application",
-  "targets": {},
-  "tags": []
+    "name": "neopress",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/neopress",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nx/next:build",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "defaultConfiguration": "production",
+            "options": {
+                "outputPath": "dist/apps/neopress"
+            },
+            "configurations": {
+                "production": {
+                    "outputPath": "dist/apps/neopress",
+                    "debug": false,
+                    "profile": false
+                },
+                "development": {
+                    "outputPath": "apps/neopress",
+                    "debug": true,
+                    "profile": true
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nx/next:server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "neopress:build",
+                "dev": true,
+                "port": 3000
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "neopress:build:development",
+                    "dev": true
+                },
+                "production": {
+                    "buildTarget": "neopress:build:production",
+                    "dev": false
+                }
+            }
+        }
+    },
+    "tags": []
 }
