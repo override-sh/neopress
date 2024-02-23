@@ -1,0 +1,35 @@
+{
+    "name": "plugin-system",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/plugin-system/src",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@nx/rollup:rollup",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "outputPath": "dist/libs/plugin-system",
+                "tsConfig": "libs/plugin-system/tsconfig.lib.json",
+                "project": "libs/plugin-system/package.json",
+                "entryFile": "libs/plugin-system/src/index.ts",
+                "external": [
+                    "react",
+                    "react-dom",
+                    "react/jsx-runtime"
+                ],
+                "rollupConfig": "@nx/react/plugins/bundle-rollup",
+                "compiler": "swc",
+                "assets": [
+                    {
+                        "glob": "libs/plugin-system/README.md",
+                        "input": ".",
+                        "output": "."
+                    }
+                ]
+            }
+        }
+    }
+}
