@@ -28,4 +28,10 @@ export default {
     setupFiles:           [
         "./setup-test.ts",
     ],
+    collectCoverage: true,
+    coverageReporters: [
+        "lcov",
+        "text",
+        "html",
+    ],
 } as Config;

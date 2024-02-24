@@ -63,6 +63,12 @@
                 "production",
                 "^production"
             ]
+        },
+        "build": {
+            "inputs": [
+                "production",
+                "^production"
+            ]
         }
     }
 }

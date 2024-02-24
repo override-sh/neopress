@@ -4,7 +4,15 @@
         "allowJs": false,
         "esModuleInterop": false,
         "allowSyntheticDefaultImports": true,
-        "strict": true
+        "strict": true,
+        "paths": {
+            "@neopress/core": [
+                "libs/core/src/index.ts"
+            ],
+            "@neopress/core/server": [
+                "libs/core/src/server.ts"
+            ]
+        }
     },
     "files": [],
     "include": [],
