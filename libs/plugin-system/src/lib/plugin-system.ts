@@ -1,3 +1,6 @@
+import { RouteEntryPoint } from "libs/plugin-system/src/lib/interfaces/route-entrypoint.enum";
+import { HTTP_METHOD } from "next/dist/server/web/http";
+import { NextRequest } from "next/server";
 import { ApiRouteStorage } from "./api-route-storage";
 import { ComponentStorage } from "./component-storage";
 import { ApiRouteDefinitionInterface } from "./interfaces/api-route-definition.interface";
@@ -20,58 +23,78 @@ export class PluginSystem {
      * Register a plugin to the system
      * @param {PluggableExtensionInterface} plugin
      */
-    public registerPlugin(plugin: PluggableExtensionInterface) {
+    public registerPlugin(plugin: PluggableExtensionInterface): this {
         this._plugin_store.register(new plugin(this));
+        return this;
     }
 
     /**
      * Register a component to the system
      * @param {ComponentDefinitionInterface} component
      */
-    public registerComponent(component: ComponentDefinitionInterface) {
+    public registerComponent(component: ComponentDefinitionInterface): this {
         this._component_store.register(component);
+        return this;
     }
 
     /**
      * Register a route to the system
      * @param {RouteDefinitionInterface} routeDefinition
      */
-    public registerRoute(routeDefinition: RouteDefinitionInterface) {
+    public registerRoute(routeDefinition: RouteDefinitionInterface): this {
         this._route_store.register(routeDefinition);
+        return this;
     }
 
     /**
      * Register an API route to the system
      * @param {ApiRouteDefinitionInterface} apiRouteDefinition
      */
-    public registerApiRoute(apiRouteDefinition: ApiRouteDefinitionInterface) {
+    public registerApiRoute(apiRouteDefinition: ApiRouteDefinitionInterface): this {
         this._api_route_store.register(apiRouteDefinition);
+        return this;
     }
 
     /**
      * Register a middleware to the system
      * @param {MiddlewareDefinitionInterface} middlewareDefinition
-     * @returns {MiddlewareStorage}
      */
-    public registerMiddleware(middlewareDefinition: MiddlewareDefinitionInterface) {
-        return this._middleware_storage.register(middlewareDefinition);
+    public registerMiddleware(middlewareDefinition: MiddlewareDefinitionInterface): this {
+        this._middleware_storage.register(middlewareDefinition);
+        return this;
+    }
+
+    /**
+     * Get an API route by its path and method
+     * @param {string[]} route The route path
+     * @param {Exclude<HTTP_METHOD, "OPTIONS">} method The HTTP method
+     */
+    public getApiRoute(route: string[], method: Exclude<HTTP_METHOD, "OPTIONS">) {
+        return this._api_route_store.get(`/${ route.join("/") }`, method);
     }
 
     /**
      * Get a route by its path
-     * @param {string[]} route
-     * @returns {RouteDefinitionInterface | null}
+     * @param {string[]} route The route path
+     * @param {RouteEntryPoint} entrypoint The entry point for the route
      */
-    public getRoute(route: string[]) {
-        return this._route_store.get(`/${ route.join("/") }`);
+    public getRoute<E extends RouteEntryPoint>(route: string[], entrypoint?: E) {
+        return this._route_store.get(`/${ route.join("/") }`, entrypoint);
     }
 
     /**
      * Get all routes
-     * @returns {Record<AliasApiRoute, RouteDefinitionInterface>}
      */
     public getAllRoutes() {
         return this._route_store.getAll();
+    }
+
+    /**
+     * Run all middleware
+     * @param {NextRequest} request
+     */
+    public runMiddleware(request: NextRequest) {
+        return this._middleware_storage.chain(request);
     }
 
     /**

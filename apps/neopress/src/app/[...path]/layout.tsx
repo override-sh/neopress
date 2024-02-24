@@ -6,29 +6,20 @@ import {
     Metadata,
     ResolvingMetadata,
 } from "next";
-import { notFound } from "next/navigation";
+import { ReactNode } from "react";
 
-export default function Page(props: DynamicRouteParams) {
-    const page = PLUGIN_SYSTEM.getRoute(props.params.path, RouteEntryPoint.page);
+export default function Layout(
+    props: DynamicRouteParams & {
+        children: ReactNode
+    },
+) {
+    const page = PLUGIN_SYSTEM.getRoute(props.params.path, RouteEntryPoint.layout);
 
     if (!page) {
-        notFound();
+        return props.children;
     }
 
-    return <page.component { ...props } />;
-}
-
-/**
- * Generate static paths for the page
- * @returns {Promise<DynamicRouteParams[]>}
- */
-export async function generateStaticParams(): Promise<DynamicRouteParams[]> {
-    return Object.keys(PLUGIN_SYSTEM.getAllRoutes()).map(route => ({
-        params:       {
-            path: route.split("/"),
-        },
-        searchParams: {},
-    }));
+    return <page.component { ...props }>{ props.children }</page.component>;
 }
 
 /**
@@ -45,7 +36,7 @@ export async function generateMetadata(
     }: DynamicRouteParams,
     parent: ResolvingMetadata,
 ): Promise<Metadata> {
-    const page = PLUGIN_SYSTEM.getRoute(params.path);
+    const page = PLUGIN_SYSTEM.getRoute(params.path, RouteEntryPoint.layout);
 
     if (!page) {
         return {};

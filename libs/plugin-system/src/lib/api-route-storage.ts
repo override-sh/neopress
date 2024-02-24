@@ -1,3 +1,4 @@
+import { HTTP_METHOD } from "next/dist/server/web/http";
 import { ApiRouteDefinitionInterface } from "./interfaces/api-route-definition.interface";
 
 type AliasApiRoute = ApiRouteDefinitionInterface["route"];
@@ -16,23 +17,24 @@ export class ApiRouteStorage {
         obj: ApiRouteDefinitionInterface,
     ): this {
         if (this._storage[obj.route]) {
-            throw new Error(`Route '${obj.route}' is already registered`);
+            throw new Error(`Route '${ obj.route }' is already registered`);
         }
-        this._storage[obj.route] = obj;
+        this._storage[`${ obj.route }-{"m":${ obj.method }}`] = obj;
         return this;
     }
 
     /**
      * Unregister an object from the storage
      * @param {AliasApiRoute} key The key of the object in the storage
+     * @param method
      * @returns {this} The storage instance without the object
      * @throws {Error} If the route does not exist in the storage
      */
-    public unregister(key: AliasApiRoute): this {
+    public unregister(key: AliasApiRoute, method: Exclude<HTTP_METHOD, "OPTIONS">): this {
         if (!(key in this._storage)) {
-            throw new Error(`Route '${key}' does not exist in the storage.`);
+            throw new Error(`Route '${ key }' does not exist in the storage.`);
         }
-        delete this._storage[key];
+        delete this._storage[`${ key }-{"m":${ method }}`];
         return this;
     }
 
@@ -47,18 +49,20 @@ export class ApiRouteStorage {
     /**
      * Get an object from the storage by key
      * @param {AliasApiRoute} key The key of the object in the storage
+     * @param method
      * @returns {ApiRouteDefinitionInterface | null} The object in the storage, or null if not found
      */
-    public get(key: AliasApiRoute): ApiRouteDefinitionInterface | null {
-        return this._storage[key] ?? null;
+    public get(key: AliasApiRoute, method: Exclude<HTTP_METHOD, "OPTIONS">): ApiRouteDefinitionInterface | null {
+        return this._storage[`${ key }-{"m":${ method }}`] ?? null;
     }
 
     /**
      * Check if a route is already registered in the storage
      * @param {AliasApiRoute} route The route to check
+     * @param method
      * @returns {boolean} True if the route is already registered, false otherwise
      */
-    public has(route: AliasApiRoute): boolean {
-        return route in this._storage;
+    public has(route: AliasApiRoute, method: Exclude<HTTP_METHOD, "OPTIONS">): boolean {
+        return `${ route }-{"m":${ method }}` in this._storage;
     }
 }
