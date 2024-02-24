@@ -2,6 +2,7 @@ import {
     PluginDefinitionInterface,
     PluginSystem,
 } from "@neopress/plugin-system";
+import Test from "./pages/test";
 
 export class SamplePlugin implements PluginDefinitionInterface {
     name = "Sample Plugin";
@@ -11,6 +12,9 @@ export class SamplePlugin implements PluginDefinitionInterface {
     constructor(private _plugin_system: PluginSystem) {}
 
     boot() {
-        console.log("Booting Sample Plugin");
+        this._plugin_system.registerRoute({
+            route:     "/sample",
+            component: Test,
+        });
     }
 }
