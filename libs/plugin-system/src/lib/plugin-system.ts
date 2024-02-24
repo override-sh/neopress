@@ -1,11 +1,10 @@
-import { RouteDefinitionInterface } from "libs/plugin-system/src/lib/interfaces/route-definition.interface";
-import { Constructor } from "type-fest";
 import { ApiRouteStorage } from "./api-route-storage";
 import { ComponentStorage } from "./component-storage";
 import { ApiRouteDefinitionInterface } from "./interfaces/api-route-definition.interface";
 import { ComponentDefinitionInterface } from "./interfaces/component-definition.interface";
 import { MiddlewareDefinitionInterface } from "./interfaces/middleware-definition.interface";
-import { PluginDefinitionInterface } from "./interfaces/plugin-definition.interface";
+import { PluggableExtensionInterface } from "./interfaces/pluggable-extension.interface";
+import { RouteDefinitionInterface } from "./interfaces/route-definition.interface";
 import { MiddlewareStorage } from "./middleware-storage";
 import { PluginStorage } from "./plugin-storage";
 import { RouteStorage } from "./route-storage";
@@ -19,9 +18,9 @@ export class PluginSystem {
 
     /**
      * Register a plugin to the system
-     * @param {PluginDefinitionInterface & Constructor<PluginDefinitionInterface, [PluginSystem]>} plugin
+     * @param {PluggableExtensionInterface} plugin
      */
-    registerPlugin(plugin: PluginDefinitionInterface & Constructor<PluginDefinitionInterface, [ PluginSystem ]>) {
+    public registerPlugin(plugin: PluggableExtensionInterface) {
         this._plugin_store.register(new plugin(this));
     }
 
@@ -29,7 +28,7 @@ export class PluginSystem {
      * Register a component to the system
      * @param {ComponentDefinitionInterface} component
      */
-    registerComponent(component: ComponentDefinitionInterface) {
+    public registerComponent(component: ComponentDefinitionInterface) {
         this._component_store.register(component);
     }
 
@@ -37,7 +36,7 @@ export class PluginSystem {
      * Register a route to the system
      * @param {RouteDefinitionInterface} routeDefinition
      */
-    registerRoute(routeDefinition: RouteDefinitionInterface) {
+    public registerRoute(routeDefinition: RouteDefinitionInterface) {
         this._route_store.register(routeDefinition);
     }
 
@@ -45,7 +44,7 @@ export class PluginSystem {
      * Register an API route to the system
      * @param {ApiRouteDefinitionInterface} apiRouteDefinition
      */
-    registerApiRoute(apiRouteDefinition: ApiRouteDefinitionInterface) {
+    public registerApiRoute(apiRouteDefinition: ApiRouteDefinitionInterface) {
         this._api_route_store.register(apiRouteDefinition);
     }
 
@@ -54,14 +53,31 @@ export class PluginSystem {
      * @param {MiddlewareDefinitionInterface} middlewareDefinition
      * @returns {MiddlewareStorage}
      */
-    registerMiddleware(middlewareDefinition: MiddlewareDefinitionInterface) {
+    public registerMiddleware(middlewareDefinition: MiddlewareDefinitionInterface) {
         return this._middleware_storage.register(middlewareDefinition);
+    }
+
+    /**
+     * Get a route by its path
+     * @param {string[]} route
+     * @returns {RouteDefinitionInterface | null}
+     */
+    public getRoute(route: string[]) {
+        return this._route_store.get(`/${ route.join("/") }`);
+    }
+
+    /**
+     * Get all routes
+     * @returns {Record<AliasApiRoute, RouteDefinitionInterface>}
+     */
+    public getAllRoutes() {
+        return this._route_store.getAll();
     }
 
     /**
      * Boot all plugins
      */
-    boot() {
+    public boot() {
         Object.values(this._plugin_store.getAll()).forEach((plugin) => {
             plugin.boot();
 
