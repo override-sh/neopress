@@ -1,8 +1,8 @@
-import type { PluginSystem } from "@neopress/plugin-system";
 import {
     createContext,
     useContext,
 } from "react";
+import type { PluginSystem } from "../plugin-system";
 
 const PluginSystemContext = createContext<{
     plugin_system: PluginSystem

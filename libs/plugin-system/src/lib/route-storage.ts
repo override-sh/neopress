@@ -21,13 +21,13 @@ export class RouteStorage {
     public register(
         obj: RouteDefinitionInterface,
     ): this {
-        if (this._storage[obj.route]) {
-            throw new Error(`Route '${ obj.route }' is already registered`);
-        }
-
         // If the entry point is not provided, use the default one
         if (!obj.entry_point) {
             obj.entry_point = RouteEntryPoint.page;
+        }
+
+        if (this._storage[`${ obj.route }-{"ep":${ obj.entry_point }}`]) {
+            throw new Error(`Route '${ obj.route }' is already registered`);
         }
 
         this._storage[`${ obj.route }-{"ep":${ obj.entry_point }}`] = obj as RouteDefinitionInterface;
@@ -42,7 +42,7 @@ export class RouteStorage {
      * @throws {Error} If the route does not exist in the storage
      */
     public unregister(key: AliasApiRoute, entrypoint: RouteEntryPoint = RouteEntryPoint.page): this {
-        if (!(key in this._storage)) {
+        if (!(`${ key }-{"ep":${ entrypoint }}` in this._storage)) {
             throw new Error(`Route '${ key }' does not exist in the storage.`);
         }
         delete this._storage[`${ key }-{"ep":${ entrypoint }}`];

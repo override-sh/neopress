@@ -32,5 +32,4 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
-      - run: npx nx-cloud record -- nx format:check
-      - run: npx nx affected -t lint test build
+      - run: pnpm nx affected -t lint test build

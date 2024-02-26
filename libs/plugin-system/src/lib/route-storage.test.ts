@@ -1,3 +1,4 @@
+import { RouteEntryPoint } from "libs/plugin-system/src/lib/interfaces/route-entrypoint.enum";
 import { RouteDefinitionInterface } from "./interfaces/route-definition.interface";
 import { RouteStorage } from "./route-storage";
 
@@ -65,8 +66,8 @@ describe("RouteStorage", () => {
         const result = route_storage.getAll();
 
         expect(result).toEqual({
-            "/route1": obj1,
-            "/route2": obj2,
+            [`/route1-{"ep":${ RouteEntryPoint.page }}`]: obj1,
+            [`/route2-{"ep":${ RouteEntryPoint.page }}`]: obj2,
         });
     });
 

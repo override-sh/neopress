@@ -1,17 +1,17 @@
 import { ReactChildren } from "@neopress/core";
 import { FC } from "react";
-import { ComponentPositions } from "./component-position.interface";
+import { ComponentPlacements } from "./component-position.interface";
 
 interface ComponentDefinitionBaseInterface {
     name: string;
     component: FC<any>;
-    placement?: ComponentPositions;
+    placement?: ComponentPlacements;
 }
 
 export interface ComponentDefinitionMixedInterface extends ComponentDefinitionBaseInterface {
     name: string;
     component: FC<unknown>;
-    placement?: ComponentPositions;
+    placement?: ComponentPlacements;
 }
 
 export interface ComponentDefinitionRootProvidersInterface extends ComponentDefinitionBaseInterface {
