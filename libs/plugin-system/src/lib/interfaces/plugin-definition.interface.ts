@@ -8,14 +8,14 @@
  * import { PluginDefinitionInterface } from "@neopress/plugin-system";
  *
  * export class SamplePlugin implements PluginDefinitionInterface {
- *     name = "Sample Plugin";
+ *     name = "Page Plugin";
  *     version = "1.0.0";
  *     description = "A sample plugin";
  *
  *     constructor(private _plugin_system: any) {}
  *
  *     boot() {
- *         console.log("Booting Sample Plugin");
+ *         console.log("Booting Page Plugin");
  *     }
  * }
  * ```

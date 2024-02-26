@@ -1,10 +1,10 @@
 "use client";
 
-import {
+import { ReactChildren } from "@neopress/core";
+import PLUGIN_SYSTEM, {
+    ComponentDefinitionRootProvidersInterface,
     PluginSystemProvider,
-    ReactChildren,
-} from "@neopress/core";
-import PLUGIN_SYSTEM, { ComponentDefinitionRootProvidersInterface } from "@neopress/plugin-system";
+} from "@neopress/plugin-system";
 import { memo } from "radash";
 import { FC } from "react";
 

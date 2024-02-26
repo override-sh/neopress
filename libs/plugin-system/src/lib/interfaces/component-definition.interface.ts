@@ -9,14 +9,12 @@ interface ComponentDefinitionBaseInterface {
 }
 
 export interface ComponentDefinitionMixedInterface extends ComponentDefinitionBaseInterface {
-    name: string;
     component: FC<unknown>;
-    placement?: ComponentPlacements;
 }
 
 export interface ComponentDefinitionRootProvidersInterface extends ComponentDefinitionBaseInterface {
     component: FC<ReactChildren>;
-    placement: "root.providers";
+    placement?: "root.providers";
 }
 
 export type ComponentDefinitionInterface =
