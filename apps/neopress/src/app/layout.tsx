@@ -1,5 +1,7 @@
 import PLUGIN_SYSTEM, {
     bootstrap,
+    ComponentDefinitionInterface,
+    ComponentDefinitionMixedInterface,
     DynamicRouteParams,
     RouteEntryPoint,
 } from "@neopress/plugin-system";
@@ -8,10 +10,24 @@ import {
     Metadata,
     ResolvingMetadata,
 } from "next";
+import { memo } from "radash";
 import { ReactNode } from "react";
 import { PLUGIN_LIST } from "../plugins";
+import { Providers } from "./providers";
 
 bootstrap(PLUGIN_LIST);
+
+const getRootHead: () => ComponentDefinitionMixedInterface[] = memo(() => PLUGIN_SYSTEM.getAllComponents("root.head"));
+const getRootBodyBefore: () => ComponentDefinitionMixedInterface[] = memo(() => PLUGIN_SYSTEM.getAllComponents(
+    "root.body.before"));
+const getRootBodyAfter: () => ComponentDefinitionMixedInterface[] = memo(() => PLUGIN_SYSTEM.getAllComponents(
+    "root.body.after"));
+
+/**
+ * Generate a key for the component
+ * @param {ComponentDefinitionInterface} v
+ */
+const makeKey = (v: ComponentDefinitionInterface) => `${ v.name }-{"p":"${ v.placement }"}`;
 
 export default function RootLayout(
     props: {
@@ -23,7 +39,28 @@ export default function RootLayout(
     if (!page) {
         return (
             <html lang="en">
-            <body>{ props.children }</body>
+            <head>
+                {
+                    getRootHead().map(v =>
+                        <v.component key={ makeKey(v) } />,
+                    )
+                }
+            </head>
+            <body>
+                {
+                    getRootBodyBefore().map(v =>
+                        <v.component key={ makeKey(v) } />,
+                    )
+                }
+                <Providers>
+                    { props.children }
+                </Providers>
+                {
+                    getRootBodyAfter().map(v =>
+                        <v.component key={ makeKey(v) } />,
+                    )
+                }
+            </body>
             </html>
         );
     }
