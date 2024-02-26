@@ -123,6 +123,13 @@ export class PluginSystem {
     }
 
     /**
+     * Get all registered plugins
+     */
+    public getRegisteredPlugins() {
+        return this._plugin_store.getAll();
+    }
+
+    /**
      * Boot all plugins
      */
     public boot() {

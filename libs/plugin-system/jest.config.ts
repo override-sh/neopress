@@ -30,7 +30,6 @@ export default {
     ],
     collectCoverage: true,
     coverageReporters: [
-        "lcov",
         "text",
         "html",
     ],

@@ -14,3 +14,4 @@ export * from "./lib/interfaces/middleware-definition.interface";
 export * from "./lib/interfaces/route-definition.interface";
 export * from "./lib/bootstrap";
 export * from "./lib/interfaces/route-entrypoint.enum";
+export * from "./lib/hooks/use-plugin-system";
