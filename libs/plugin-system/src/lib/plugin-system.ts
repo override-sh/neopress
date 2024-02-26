@@ -8,7 +8,7 @@ import {
     ComponentDefinitionMixedInterface,
     ComponentDefinitionRootProvidersInterface,
 } from "./interfaces/component-definition.interface";
-import { ComponentPositions } from "./interfaces/component-position.interface";
+import { ComponentPlacements } from "./interfaces/component-position.interface";
 import { MiddlewareDefinitionInterface } from "./interfaces/middleware-definition.interface";
 import { PluggableExtensionInterface } from "./interfaces/pluggable-extension.interface";
 import { RouteDefinitionInterface } from "./interfaces/route-definition.interface";
@@ -105,17 +105,17 @@ export class PluginSystem {
     /**
      * Get a component by its name and position
      * @param {string} name The name of the component
-     * @param {ComponentPositions} position The position of the component in the layout
+     * @param {ComponentPlacements} position The position of the component in the layout
      */
-    public getComponent(name: string, position?: ComponentPositions) {
+    public getComponent(name: string, position?: ComponentPlacements) {
         return this._component_store.get(name, position);
     }
 
     /**
      * Get all components
-     * @param {ComponentPositions} position The position of the component in the layout
+     * @param {ComponentPlacements} position The position of the component in the layout
      */
-    public getAllComponents<P extends ComponentPositions>(position?: P):
+    public getAllComponents<P extends ComponentPlacements>(position?: P):
         P extends "root.providers"
         ? ComponentDefinitionRootProvidersInterface[]
         : ComponentDefinitionMixedInterface[] {

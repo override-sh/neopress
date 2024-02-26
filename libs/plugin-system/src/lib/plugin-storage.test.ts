@@ -13,7 +13,9 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "A sample plugin",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
 
         pluginStorage.register(plugin);
@@ -36,19 +38,25 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "Plugin 1",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
         const plugin2: PluginDefinitionInterface = {
             name:        "plugin2",
             version:     "2.0.0",
             description: "Plugin 2",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
         const plugin3: PluginDefinitionInterface = {
             name:        "plugin3",
             version:     "3.0.0",
             description: "Plugin 3",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
 
         pluginStorage.register(plugin1);
@@ -71,7 +79,9 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "Plugin 1",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
 
         pluginStorage.register(plugin);
@@ -89,7 +99,9 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "Plugin 1",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
 
         pluginStorage.register(plugin);
@@ -106,7 +118,9 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "A sample plugin",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
         const state: PluginStateInterface = {
             booted: true,
@@ -125,13 +139,17 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "A sample plugin",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
         const plugin2: PluginDefinitionInterface = {
             name:        "plugin1",
             version:     "2.0.0",
             description: "Another sample plugin",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
 
         pluginStorage.register(plugin1);
@@ -177,7 +195,9 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "A sample plugin",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
         const state: PluginStateInterface = {
             booted: true,
@@ -199,7 +219,9 @@ describe("PluginStorage", () => {
             name:        "plugin1",
             version:     "1.0.0",
             description: "A sample plugin",
-            boot:        () => {},
+            boot: () => {
+                // Do something
+            },
         };
 
         pluginStorage.register(plugin);

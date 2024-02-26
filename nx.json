@@ -37,6 +37,12 @@
             "options": {
                 "targetName": "lint"
             }
+        },
+        {
+            "plugin": "@nx/playwright/plugin",
+            "options": {
+                "targetName": "e2e"
+            }
         }
     ],
     "generators": {
@@ -52,7 +58,7 @@
             }
         }
     },
-    "nxCloudAccessToken": "ZGM1ZjdkZmEtMGEwNS00NDM2LTkxZDAtZDRkZTI5NzJmNWZlfHJlYWQtd3JpdGU=",
+    "nxCloudAccessToken": "NWM0YTNhMWQtYmUzZS00MTNmLThmYjktMzg1MGExMGIyOWVkfHJlYWQ=",
     "targetDefaults": {
         "@nx/rollup:rollup": {
             "cache": true,

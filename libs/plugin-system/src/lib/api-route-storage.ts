@@ -16,10 +16,10 @@ export class ApiRouteStorage {
     public register(
         obj: ApiRouteDefinitionInterface,
     ): this {
-        if (this._storage[obj.route]) {
+        if (this._storage[`${ obj.route }-{"m":"${ obj.method }"}`]) {
             throw new Error(`Route '${ obj.route }' is already registered`);
         }
-        this._storage[`${ obj.route }-{"m":${ obj.method }}`] = obj;
+        this._storage[`${ obj.route }-{"m":"${ obj.method }"}`] = obj;
         return this;
     }
 
@@ -31,10 +31,10 @@ export class ApiRouteStorage {
      * @throws {Error} If the route does not exist in the storage
      */
     public unregister(key: AliasApiRoute, method: Exclude<HTTP_METHOD, "OPTIONS">): this {
-        if (!(key in this._storage)) {
+        if (!(`${ key }-{"m":"${ method }"}` in this._storage)) {
             throw new Error(`Route '${ key }' does not exist in the storage.`);
         }
-        delete this._storage[`${ key }-{"m":${ method }}`];
+        delete this._storage[`${ key }-{"m":"${ method }"}`];
         return this;
     }
 
@@ -53,7 +53,7 @@ export class ApiRouteStorage {
      * @returns {ApiRouteDefinitionInterface | null} The object in the storage, or null if not found
      */
     public get(key: AliasApiRoute, method: Exclude<HTTP_METHOD, "OPTIONS">): ApiRouteDefinitionInterface | null {
-        return this._storage[`${ key }-{"m":${ method }}`] ?? null;
+        return this._storage[`${ key }-{"m":"${ method }"}`] ?? null;
     }
 
     /**
@@ -63,6 +63,6 @@ export class ApiRouteStorage {
      * @returns {boolean} True if the route is already registered, false otherwise
      */
     public has(route: AliasApiRoute, method: Exclude<HTTP_METHOD, "OPTIONS">): boolean {
-        return `${ route }-{"m":${ method }}` in this._storage;
+        return `${ route }-{"m":"${ method }"}` in this._storage;
     }
 }

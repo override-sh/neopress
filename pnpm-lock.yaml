@@ -43,6 +43,9 @@ devDependencies:
   '@nx/next':
     specifier: 18.0.4
     version: 18.0.4(@babel/core@7.23.9)(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(next@14.0.4)(nx@18.0.4)(typescript@5.3.3)(webpack@5.90.3)
+  '@nx/playwright':
+    specifier: 18.0.4
+    version: 18.0.4(@playwright/test@1.41.2)(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(nx@18.0.4)(typescript@5.3.3)
   '@nx/react':
     specifier: 18.0.4
     version: 18.0.4(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(nx@18.0.4)(typescript@5.3.3)
@@ -52,6 +55,9 @@ devDependencies:
   '@nx/workspace':
     specifier: 18.0.4
     version: 18.0.4(@swc-node/register@1.8.0)(@swc/core@1.3.107)
+  '@playwright/test':
+    specifier: ^1.36.0
+    version: 1.41.2
   '@rollup/plugin-url':
     specifier: ^7.0.0
     version: 7.0.0(rollup@2.79.1)
@@ -2503,6 +2509,35 @@ packages:
     dev: true
     optional: true
 
+  /@nx/playwright@18.0.4(@playwright/test@1.41.2)(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(nx@18.0.4)(typescript@5.3.3):
+    resolution: { integrity: sha512-HTex+K8O9ZWZw9RyiRiw1x46Tc0DOqCWVC0Gouu1oN7sPiukag1OwKpmaELx7UXYzo2O42D8Wr5It7tFGLvWEQ== }
+    peerDependencies:
+      '@playwright/test': ^1.36.0
+    peerDependenciesMeta:
+      '@playwright/test':
+        optional: true
+    dependencies:
+      '@nx/devkit': 18.0.4(nx@18.0.4)
+      '@nx/eslint': 18.0.4(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(nx@18.0.4)
+      '@nx/js': 18.0.4(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(nx@18.0.4)(typescript@5.3.3)
+      '@phenomnomnominal/tsquery': 5.0.1(typescript@5.3.3)
+      '@playwright/test': 1.41.2
+      minimatch: 9.0.3
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - '@swc/wasm'
+      - '@types/node'
+      - debug
+      - js-yaml
+      - nx
+      - supports-color
+      - typescript
+      - verdaccio
+    dev: true
+
   /@nx/react@18.0.4(@swc-node/register@1.8.0)(@swc/core@1.3.107)(@types/node@18.16.9)(nx@18.0.4)(typescript@5.3.3):
     resolution: { integrity: sha512-a67oULoXM0wWpTt4Tf3oJZY4CU1N2AEz5LVHE8LaKXwBi8gzbCSxVAVyeON3Jv1hNR6tmRdWFq7HuKnmKSR5rw== }
     dependencies:
@@ -2691,6 +2726,14 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@playwright/test@1.41.2:
+    resolution: { integrity: sha512-qQB9h7KbibJzrDpkXkYvsmiDJK14FULCCZgEcoe2AvFAS64oCirWTwzTlAYEbKaRxWs5TFesE1Na6izMv3HfGg== }
+    engines: { node: '>=16' }
+    hasBin: true
+    dependencies:
+      playwright: 1.41.2
+    dev: true
 
   /@rollup/plugin-babel@5.3.1(@babel/core@7.23.9)(rollup@2.79.1):
     resolution: { integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q== }
@@ -6579,6 +6622,14 @@ packages:
     resolution: { integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw== }
     dev: true
 
+  /fsevents@2.3.2:
+    resolution: { integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA== }
+    engines: { node: ^8.16.0 || ^10.6.0 || >=11.0.0 }
+    os: [ darwin ]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /fsevents@2.3.3:
     resolution: { integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw== }
     engines: { node: ^8.16.0 || ^10.6.0 || >=11.0.0 }
@@ -9105,6 +9156,22 @@ packages:
     engines: { node: '>=14.16' }
     dependencies:
       find-up: 6.3.0
+    dev: true
+
+  /playwright-core@1.41.2:
+    resolution: { integrity: sha512-VaTvwCA4Y8kxEe+kfm2+uUUw5Lubf38RxF7FpBxLPmGe5sdNkSg5e3ChEigaGrX7qdqT3pt2m/98LiyvU2x6CA== }
+    engines: { node: '>=16' }
+    hasBin: true
+    dev: true
+
+  /playwright@1.41.2:
+    resolution: { integrity: sha512-v0bOa6H2GJChDL8pAeLa/LZC4feoAMbSQm1/jF/ySsWWoaNItvrMP7GEkvEEFyCTUYKMxjQKaTSg5up7nR6/8A== }
+    engines: { node: '>=16' }
+    hasBin: true
+    dependencies:
+      playwright-core: 1.41.2
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /portfinder@1.0.32:

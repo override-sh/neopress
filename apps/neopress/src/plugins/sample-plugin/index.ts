@@ -2,7 +2,7 @@ import {
     PluginDefinitionInterface,
     PluginSystem,
 } from "@neopress/plugin-system";
-import Test from "./pages/test";
+import Sample from "./pages/sample";
 
 export class SamplePlugin implements PluginDefinitionInterface {
     name = "Sample Plugin";
@@ -14,7 +14,7 @@ export class SamplePlugin implements PluginDefinitionInterface {
     boot() {
         this._plugin_system.registerRoute({
             route:     "/sample",
-            component: Test,
+            component: Sample,
         });
     }
 }

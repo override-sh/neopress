@@ -1,7 +1,9 @@
+import {
+    NextRequest,
+    NextResponse,
+} from "next/server";
+import { ApiRouteStorage } from "./api-route-storage";
 import { ApiRouteDefinitionInterface } from "./interfaces/api-route-definition.interface";
-import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
-import {ApiRouteStorage} from "./api-route-storage";
 
 describe('ApiRouteStorage', () => {
 
@@ -13,11 +15,12 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj);
 
-        expect(apiRouteStorage.get("/test")).toEqual(obj);
+        expect(apiRouteStorage.get("/test", "GET")).toEqual(obj);
     });
 
     // Throw an error when registering an object with an already registered route
@@ -28,12 +31,14 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
         const obj2: ApiRouteDefinitionInterface = {
             route: "/test",
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj1);
@@ -49,12 +54,13 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj);
-        apiRouteStorage.unregister("/route1");
+        apiRouteStorage.unregister("/route1", "GET");
 
-        expect(apiRouteStorage.get("/route1")).toBeNull();
+        expect(apiRouteStorage.get("/route1", "GET")).toBeNull();
     });
 
     // Get all objects in the storage successfully
@@ -65,12 +71,14 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
         const obj2: ApiRouteDefinitionInterface = {
             route: "/route2",
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj1);
@@ -79,8 +87,8 @@ describe('ApiRouteStorage', () => {
         const result = apiRouteStorage.getAll();
 
         expect(result).toEqual({
-            "/route1": obj1,
-            "/route2": obj2,
+            "/route1-{\"m\":\"GET\"}": obj1,
+            "/route2-{\"m\":\"GET\"}": obj2,
         });
     });
 
@@ -92,11 +100,12 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj);
 
-        const result = apiRouteStorage.get("/route1");
+        const result = apiRouteStorage.get("/route1", "GET");
 
         expect(result).toEqual(obj);
     });
@@ -109,11 +118,12 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj);
 
-        const result = apiRouteStorage.get("/invalid");
+        const result = apiRouteStorage.get("/invalid", "GET");
 
         expect(result).toBeNull();
     });
@@ -126,11 +136,12 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj);
 
-        expect(() => apiRouteStorage.unregister("/invalid")).toThrow(`Route '/invalid' does not exist`);
+        expect(() => apiRouteStorage.unregister("/invalid", "GET")).toThrow(`Route '/invalid' does not exist`);
     });
 
     // Check if a route is already registered in the storage
@@ -141,11 +152,12 @@ describe('ApiRouteStorage', () => {
             handler: (request: NextRequest) => {
                 return new NextResponse();
             },
+            method: "GET",
         };
 
         apiRouteStorage.register(obj);
 
-        const result = apiRouteStorage.has("/route1");
+        const result = apiRouteStorage.has("/route1", "GET");
 
         expect(result).toBe(true);
     });
