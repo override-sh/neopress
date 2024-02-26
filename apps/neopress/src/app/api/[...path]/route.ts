@@ -15,7 +15,7 @@ const handler = async (
         }
     },
 ) => {
-    const route = PLUGIN_SYSTEM.getRoute(context.params.path, req.method as any);
+    const route = PLUGIN_SYSTEM.getApiRoute(context.params.path, req.method as any);
 
     if (!route) {
         return NextResponse.json(
@@ -27,6 +27,8 @@ const handler = async (
             },
         );
     }
+
+    return route.handler(req);
 };
 
 export const GET = handler;
