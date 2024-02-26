@@ -1,13 +1,18 @@
-import { RouteEntryPoint } from "libs/plugin-system/src/lib/interfaces/route-entrypoint.enum";
 import { HTTP_METHOD } from "next/dist/server/web/http";
 import { NextRequest } from "next/server";
 import { ApiRouteStorage } from "./api-route-storage";
 import { ComponentStorage } from "./component-storage";
 import { ApiRouteDefinitionInterface } from "./interfaces/api-route-definition.interface";
-import { ComponentDefinitionInterface } from "./interfaces/component-definition.interface";
+import {
+    ComponentDefinitionInterface,
+    ComponentDefinitionMixedInterface,
+    ComponentDefinitionRootProvidersInterface,
+} from "./interfaces/component-definition.interface";
+import { ComponentPositions } from "./interfaces/component-position.interface";
 import { MiddlewareDefinitionInterface } from "./interfaces/middleware-definition.interface";
 import { PluggableExtensionInterface } from "./interfaces/pluggable-extension.interface";
 import { RouteDefinitionInterface } from "./interfaces/route-definition.interface";
+import { RouteEntryPoint } from "./interfaces/route-entrypoint.enum";
 import { MiddlewareStorage } from "./middleware-storage";
 import { PluginStorage } from "./plugin-storage";
 import { RouteStorage } from "./route-storage";
@@ -95,6 +100,26 @@ export class PluginSystem {
      */
     public runMiddleware(request: NextRequest) {
         return this._middleware_storage.chain(request);
+    }
+
+    /**
+     * Get a component by its name and position
+     * @param {string} name The name of the component
+     * @param {ComponentPositions} position The position of the component in the layout
+     */
+    public getComponent(name: string, position?: ComponentPositions) {
+        return this._component_store.get(name, position);
+    }
+
+    /**
+     * Get all components
+     * @param {ComponentPositions} position The position of the component in the layout
+     */
+    public getAllComponents<P extends ComponentPositions>(position?: P):
+        P extends "root.providers"
+        ? ComponentDefinitionRootProvidersInterface[]
+        : ComponentDefinitionMixedInterface[] {
+        return Object.values(this._component_store.getAll(position)) as any;
     }
 
     /**

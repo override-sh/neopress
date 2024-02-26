@@ -1,4 +1,9 @@
-import { ComponentDefinitionInterface } from "./interfaces/component-definition.interface";
+import { ComponentPositions } from "libs/plugin-system/src/lib/interfaces/component-position.interface";
+import {
+    ComponentDefinitionInterface,
+    ComponentDefinitionMixedInterface,
+    ComponentDefinitionRootProvidersInterface,
+} from "./interfaces/component-definition.interface";
 
 type AliasComponentName = ComponentDefinitionInterface["name"];
 
@@ -15,7 +20,7 @@ export class ComponentStorage {
         obj: ComponentDefinitionInterface,
     ): this {
         if (this._storage[obj.name]) {
-            throw new Error(`Object with name '${obj.name}' is already registered.`);
+            throw new Error(`Object with name '${ obj.name }' is already registered.`);
         }
         this._storage[obj.name] = obj;
         return this;
@@ -28,7 +33,7 @@ export class ComponentStorage {
      */
     public unregister(key: AliasComponentName): this {
         if (!(key in this._storage)) {
-            throw new Error(`Object with key '${key}' does not exist in the storage.`);
+            throw new Error(`Object with key '${ key }' does not exist in the storage.`);
         }
         delete this._storage[key];
         return this;
@@ -44,19 +49,36 @@ export class ComponentStorage {
     }
 
     /**
-     * Get a list of all objects in the storage
+     * Get a list of all objects in the storage (un-mutable), optionally filtered by position
      * @returns {Record<AliasComponentName, ComponentDefinitionInterface>} The list of objects in the storage
      */
-    public getAll(): Record<AliasComponentName, ComponentDefinitionInterface> {
-        return { ...this._storage };
+    public getAll<P extends ComponentPositions>(position?: P):
+        P extends "root.providers"
+        ? Record<AliasComponentName, ComponentDefinitionRootProvidersInterface>
+        : Record<AliasComponentName, ComponentDefinitionMixedInterface> {
+        return {
+            ...(
+                Object.values(this._storage)
+                    .filter(v => v.placement === position)
+                    .reduce(
+                        (acc, v) => {
+                            acc[v.name] = v;
+                            return acc;
+                        },
+                        {} as Record<AliasComponentName, ComponentDefinitionInterface>,
+                    )
+            ),
+        } as any;
     }
 
     /**
      * Get an object from the storage by key
      * @param {AliasComponentName} key The key of the object in the storage
+     * @param {ComponentPositions | undefined} position The position class of the object (where to place it in the
+     *     layout)
      * @returns {ComponentDefinitionInterface | null} The object in the storage, or null if not found
      */
-    public get(key: AliasComponentName): ComponentDefinitionInterface | null {
-        return this._storage[key] ?? null;
+    public get(key: AliasComponentName, position?: ComponentPositions): ComponentDefinitionInterface | null {
+        return this._storage[`${ key }-{"p":${ position }}`] ?? null;
     }
 }
