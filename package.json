@@ -2,7 +2,14 @@
     "name": "@neopress/source",
     "version": "0.0.0",
     "license": "MIT",
-    "scripts": {},
+    "scripts": {
+        "serve:dev": "pnpm nx run neopress:serve:development",
+        "serve:prod": "pnpm nx run neopress:serve:production",
+        "build": "pnpm nx run neopress:build",
+        "test": "pnpm nx affected -t test e2e",
+        "test:jest": "pnpm nx affected -t test",
+        "test:playwright": "pnpm nx affected -t e2e"
+    },
     "private": true,
     "dependencies": {
         "glob": "^10.3.10",
