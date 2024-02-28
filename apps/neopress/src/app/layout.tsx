@@ -5,7 +5,6 @@ import PLUGIN_SYSTEM, {
     DynamicRouteParams,
     RouteEntryPoint,
 } from "@neopress/plugin-system";
-import "./global.css";
 import {
     Metadata,
     ResolvingMetadata,

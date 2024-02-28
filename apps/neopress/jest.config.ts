@@ -2,6 +2,7 @@
 import { Config } from "jest";
 
 export default {
+    testEnvironment: "node",
     displayName:              "neopress",
     preset:                   "../../jest.preset.js",
     transform:                {
@@ -19,9 +20,6 @@ export default {
     ],
     coverageDirectory:        "../../coverage/apps/neopress",
     modulePathIgnorePatterns: [ "<rootDir>/e2e/" ],
-    setupFiles:               [
-        "./setup-test.ts",
-    ],
     collectCoverage:          true,
     coverageReporters:        [
         "text",
