@@ -6,6 +6,7 @@ import { MockApi } from "./mocks/api";
 import { MockComponent } from "./mocks/component";
 import { MockMiddleware } from "./mocks/middleware";
 import { MockPage } from "./mocks/page";
+import { MockComponentHead } from "./mocks/component-head";
 
 export class MockPlugin implements PluginDefinitionInterface {
     name = "Mock Plugin";
@@ -27,6 +28,26 @@ export class MockPlugin implements PluginDefinitionInterface {
         this._plugin_system.registerComponent({
             name:      "MockComponent",
             component: MockComponent,
+        });
+        this._plugin_system.registerComponent({
+            name:      "MockComponentHead",
+            component: MockComponentHead,
+            placement: "root.head"
+        });
+        this._plugin_system.registerComponent({
+            name:      "MockComponent",
+            component: MockComponent,
+            placement: "root.providers"
+        });
+        this._plugin_system.registerComponent({
+            name:      "MockComponent",
+            component: MockComponent,
+            placement: "root.body.after"
+        });
+        this._plugin_system.registerComponent({
+            name:      "MockComponent",
+            component: MockComponent,
+            placement: "root.body.before"
         });
         this._plugin_system.registerMiddleware({
             name:    "MockMiddleware",

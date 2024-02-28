@@ -12,6 +12,7 @@ import dotenv from "dotenv";
  * https://github.com/motdotla/dotenv
  */
 dotenv.config();
+process.env["SKIP_MIDDLEWARE"] = "1"
 
 // For CI, you may want to set BASE_URL to the deployed application.
 const baseURL = process.env["NEXT_PUBLIC_BASE_URL"] || "http://localhost:3000";
