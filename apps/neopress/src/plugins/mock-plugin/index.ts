@@ -4,9 +4,9 @@ import {
 } from "@neopress/plugin-system";
 import { MockApi } from "./mocks/api";
 import { MockComponent } from "./mocks/component";
+import { MockComponentHead } from "./mocks/component-head";
 import { MockMiddleware } from "./mocks/middleware";
 import { MockPage } from "./mocks/page";
-import { MockComponentHead } from "./mocks/component-head";
 
 export class MockPlugin implements PluginDefinitionInterface {
     name = "Mock Plugin";
@@ -23,6 +23,26 @@ export class MockPlugin implements PluginDefinitionInterface {
         this._plugin_system.registerApiRoute({
             route:   "/mock-api",
             method:  "GET",
+            handler: MockApi,
+        });
+        this._plugin_system.registerApiRoute({
+            route:   "/mock-api",
+            method:  "PUT",
+            handler: MockApi,
+        });
+        this._plugin_system.registerApiRoute({
+            route:   "/mock-api",
+            method:  "POST",
+            handler: MockApi,
+        });
+        this._plugin_system.registerApiRoute({
+            route:   "/mock-api",
+            method:  "PATCH",
+            handler: MockApi,
+        });
+        this._plugin_system.registerApiRoute({
+            route:   "/mock-api",
+            method:  "DELETE",
             handler: MockApi,
         });
         this._plugin_system.registerComponent({
