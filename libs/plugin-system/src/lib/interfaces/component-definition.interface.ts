@@ -8,9 +8,7 @@ interface ComponentDefinitionBaseInterface {
     placement?: ComponentPlacements;
 }
 
-export interface ComponentDefinitionMixedInterface extends ComponentDefinitionBaseInterface {
-    component: FC<unknown>;
-}
+export type ComponentDefinitionMixedInterface = ComponentDefinitionBaseInterface
 
 export interface ComponentDefinitionRootProvidersInterface extends ComponentDefinitionBaseInterface {
     component: FC<ReactChildren>;
