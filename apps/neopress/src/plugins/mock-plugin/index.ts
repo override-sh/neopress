@@ -2,6 +2,9 @@ import {
     PluginDefinitionInterface,
     PluginSystem,
 } from "@neopress/plugin-system";
+import { MockComponentAfterBody } from "apps/neopress/src/plugins/mock-plugin/mocks/component-after-body";
+import { MockComponentBeforeBody } from "apps/neopress/src/plugins/mock-plugin/mocks/component-before-body";
+import { MockComponentProviders } from "apps/neopress/src/plugins/mock-plugin/mocks/component-providers";
 import { MockApi } from "./mocks/api";
 import { MockComponent } from "./mocks/component";
 import { MockComponentHead } from "./mocks/component-head";
@@ -20,6 +23,7 @@ export class MockPlugin implements PluginDefinitionInterface {
             route:     "/mock-page",
             component: MockPage,
         });
+
         this._plugin_system.registerApiRoute({
             route:   "/mock-api",
             method:  "GET",
@@ -45,6 +49,7 @@ export class MockPlugin implements PluginDefinitionInterface {
             method:  "DELETE",
             handler: MockApi,
         });
+
         this._plugin_system.registerComponent({
             name:      "MockComponent",
             component: MockComponent,
@@ -56,19 +61,20 @@ export class MockPlugin implements PluginDefinitionInterface {
         });
         this._plugin_system.registerComponent({
             name:      "MockComponent",
-            component: MockComponent,
+            component: MockComponentProviders,
             placement: "root.providers"
         });
         this._plugin_system.registerComponent({
             name:      "MockComponent",
-            component: MockComponent,
+            component: MockComponentAfterBody,
             placement: "root.body.after"
         });
         this._plugin_system.registerComponent({
             name:      "MockComponent",
-            component: MockComponent,
+            component: MockComponentBeforeBody,
             placement: "root.body.before"
         });
+
         this._plugin_system.registerMiddleware({
             name:    "MockMiddleware",
             handler: MockMiddleware,

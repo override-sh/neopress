@@ -69,7 +69,6 @@ project simultaneously.
 
 # TODO:
 
-- [ ] Complete testing of the base application
 - [ ] Write documentation
 - [ ] Add Tailwind CSS
 - [ ] Create landing page plugin with Tailwind CSS
