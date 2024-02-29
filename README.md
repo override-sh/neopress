@@ -1,5 +1,5 @@
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer">
-<img src="_assets/logo.png">
+<a alt="NeoPress" href="https://neopress.gitbook.io/neopress/" target="_blank" rel="noreferrer">
+<img src="https://raw.githubusercontent.com/override-sh/neopress/main/_assets/logo.png">
 </a>
 
 ## Introduction
