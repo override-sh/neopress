@@ -37,6 +37,12 @@
             "options": {
                 "targetName": "lint"
             }
+        },
+        {
+            "plugin": "@nx/playwright/plugin",
+            "options": {
+                "targetName": "e2e"
+            }
         }
     ],
     "generators": {
@@ -45,7 +51,30 @@
                 "style": "scss",
                 "linter": "eslint"
             }
+        },
+        "@nx/react": {
+            "library": {
+                "unitTestRunner": "jest"
+            }
         }
     },
-    "nxCloudAccessToken": "ZGM1ZjdkZmEtMGEwNS00NDM2LTkxZDAtZDRkZTI5NzJmNWZlfHJlYWQtd3JpdGU="
+    "nxCloudAccessToken": "NWM0YTNhMWQtYmUzZS00MTNmLThmYjktMzg1MGExMGIyOWVkfHJlYWQ=",
+    "targetDefaults": {
+        "@nx/rollup:rollup": {
+            "cache": true,
+            "dependsOn": [
+                "^build"
+            ],
+            "inputs": [
+                "production",
+                "^production"
+            ]
+        },
+        "build": {
+            "inputs": [
+                "production",
+                "^production"
+            ]
+        }
+    }
 }

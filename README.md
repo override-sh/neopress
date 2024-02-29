@@ -40,6 +40,7 @@ headless CMS solutions.
 
 ### Installation
 
+......................................................
 1) Clone the NeoPress repository
 
 ```bash

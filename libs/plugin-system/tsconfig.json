@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "allowJs": false,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "paths": {
+            "@neopress/core": [
+                "libs/core/src/index.ts"
+            ],
+            "@neopress/core/server": [
+                "libs/core/src/server.ts"
+            ]
+        }
+    },
+    "files": [],
+    "include": [],
+    "references": [
+        {
+            "path": "./tsconfig.lib.json"
+        },
+        {
+            "path": "./tsconfig.spec.json"
+        }
+    ],
+    "extends": "../../tsconfig.base.json"
+}
