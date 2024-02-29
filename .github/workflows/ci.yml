@@ -32,8 +32,7 @@ jobs:
           cache: 'pnpm'
       - run: |
           # Workaround for https://github.com/nrwl/nx/issues/21823
-          mkdir node_modules
-          touch node_modules/.modules.yaml
+          mkdir node_modules -p && touch node_modules/.modules.yaml
           pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
       - run: pnpm nx affected -t lint test build
