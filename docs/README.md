@@ -1,3 +1,5 @@
+# NeoPress Overview
+
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer">
 <img src="_assets/logo.png">
 </a>
@@ -43,7 +45,7 @@ headless CMS solutions.
 1) Clone the NeoPress repository
 
 ```bash
-git clone https://github.com/your-username/neopress.git
+git clone https://github.com/override-sh/neopress.git
 ```
 
 2) Navigate to the project directory and install the dependencies
