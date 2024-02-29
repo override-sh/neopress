@@ -66,13 +66,3 @@ This will start the Next.js development server and the Nx workspace, allowing yo
 project simultaneously.
 
 2) Access the CMS UI in your browser navigating to [http://localhost:3000](http://localhost:3000)
-
-# TODO:
-
-- [ ] Write documentation
-- [ ] Add Tailwind CSS
-- [ ] Create landing page plugin with Tailwind CSS
-- [ ] Add authentication plugin
-- [ ] Add plugin management system (install, uninstall, update) based on git protocol
-- [ ] Add user management plugin
-- [ ] Add content management plugin
