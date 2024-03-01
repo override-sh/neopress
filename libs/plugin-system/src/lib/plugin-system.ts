@@ -1,6 +1,8 @@
 import { HTTP_METHOD } from "next/dist/server/web/http";
 import { NextRequest } from "next/server";
+import { Constructor } from "type-fest";
 import { ApiRouteStorage } from "./api-route-storage";
+import { BasePlugin } from "./base-plugin";
 import { ComponentStorage } from "./component-storage";
 import { ApiRouteDefinitionInterface } from "./interfaces/api-route-definition.interface";
 import {
@@ -10,7 +12,6 @@ import {
 } from "./interfaces/component-definition.interface";
 import { ComponentPlacements } from "./interfaces/component-position.interface";
 import { MiddlewareDefinitionInterface } from "./interfaces/middleware-definition.interface";
-import { PluggableExtensionInterface } from "./interfaces/pluggable-extension.interface";
 import { RouteDefinitionInterface } from "./interfaces/route-definition.interface";
 import { RouteEntryPoint } from "./interfaces/route-entrypoint.enum";
 import { MiddlewareStorage } from "./middleware-storage";
@@ -28,7 +29,7 @@ export class PluginSystem {
      * Register a plugin to the system
      * @param {PluggableExtensionInterface} plugin
      */
-    public registerPlugin(plugin: PluggableExtensionInterface): this {
+    public registerPlugin(plugin: Constructor<BasePlugin, [ PluginSystem ]>): this {
         this._plugin_store.register(new plugin(this));
         return this;
     }

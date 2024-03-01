@@ -8,6 +8,9 @@ import { RouteEntryPoint } from "./interfaces/route-entrypoint.enum";
 
 type AliasApiRoute = RouteDefinitionInterface["route"];
 
+/**
+ * A storage for route definitions (aka pages or views)
+ */
 export class RouteStorage {
     private _storage: Record<AliasApiRoute, RouteDefinitionInterface> = {};
 

@@ -7,6 +7,9 @@ import { ComponentPlacements } from "./interfaces/component-position.interface";
 
 type AliasComponentName = ComponentDefinitionInterface["name"];
 
+/**
+ * A storage for components, to keep track of all components
+ */
 export class ComponentStorage {
     private _storage: Record<AliasComponentName, ComponentDefinitionInterface> = {};
 

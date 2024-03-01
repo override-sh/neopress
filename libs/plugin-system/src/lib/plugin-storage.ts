@@ -5,6 +5,9 @@ import {
 
 type AliasPluginName = PluginDefinitionInterface["name"];
 
+/**
+ * A storage for plugins, to keep track of all plugins and their states
+ */
 export class PluginStorage {
     private _storage: Record<AliasPluginName, PluginDefinitionInterface> = {};
     private _state: Record<AliasPluginName, PluginStateInterface> = {};
