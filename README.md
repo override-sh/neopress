@@ -1,5 +1,5 @@
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer">
-<img src="_assets/logo.png">
+<a alt="NeoPress" href="https://neopress.gitbook.io/neopress/" target="_blank" rel="noreferrer">
+<img src="https://raw.githubusercontent.com/override-sh/neopress/main/_assets/logo.png">
 </a>
 
 ## Introduction
@@ -40,7 +40,6 @@ headless CMS solutions.
 
 ### Installation
 
-......................................................
 1) Clone the NeoPress repository
 
 ```bash
@@ -65,4 +64,4 @@ nx run neopress:serve
 This will start the Next.js development server and the Nx workspace, allowing you to work on different parts of the
 project simultaneously.
 
-2) Access the CMS UI in your browser navigating to [http://localhost:3000](http://localhost:3000)
+2) Access the CMS UI in your browser by navigating to [http://localhost:3000](http://localhost:3000)

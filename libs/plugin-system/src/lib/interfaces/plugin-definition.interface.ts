@@ -5,14 +5,20 @@
  *
  * @code
  * ```typescript
- * import { PluginDefinitionInterface } from "@neopress/plugin-system";
+ * import {
+ *     PluginSystem,
+ *     BasePlugin
+ * } from "@neopress/plugin-system";
  *
- * export class SamplePlugin implements PluginDefinitionInterface {
- *     name = "Page Plugin";
- *     version = "1.0.0";
- *     description = "A sample plugin";
+ * export class MockPlugin extends BasePlugin {
+ *     public static name = "Mock Plugin";
+ *     public static version = "1.0.0";
+ *     public static description = "A sample mock plugin used for testing purposes, remove this before production
+ *     deployment.";
  *
- *     constructor(private _plugin_system: any) {}
+ *     constructor(protected _plugin_system: PluginSystem) {
+ *         super(_plugin_system);
+ *     }
  *
  *     boot() {
  *         console.log("Booting Page Plugin");
@@ -22,13 +28,29 @@
  * @endcode
  */
 export interface PluginDefinitionInterface {
+    /**
+     * The name of the plugin
+     */
     name: string;
+    /**
+     * The version of the plugin
+     */
     version: string;
+    /**
+     * Optional description of the plugin
+     */
     description?: string;
 
+    /**
+     * Boot the plugin
+     * @returns {void | Promise<void>}
+     */
     boot: () => void | Promise<void>;
 }
 
 export interface PluginStateInterface {
+    /**
+     * Whether the plugin has been booted
+     */
     booted: boolean;
 }
