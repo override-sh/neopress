@@ -2,14 +2,14 @@ import { PluginDefinitionInterface } from "./interfaces/plugin-definition.interf
 import { PluginSystem } from "./plugin-system";
 
 export abstract class BasePlugin implements PluginDefinitionInterface {
-    public static name: string;
+    public static plugin_name: string;
     public static version: string;
     public static description?: string;
 
     protected constructor(protected _plugin_system: PluginSystem) {}
 
     public get name(): string {
-        return (this.constructor as typeof BasePlugin).name;
+        return (this.constructor as typeof BasePlugin).plugin_name;
     }
 
     public get version(): string {

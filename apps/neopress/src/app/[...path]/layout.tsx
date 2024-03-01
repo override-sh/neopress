@@ -9,14 +9,14 @@ import {
 import { ReactNode } from "react";
 
 export default function Layout(
-    props: DynamicRouteParams & {
+    props: Omit<DynamicRouteParams, "searchParams"> & {
         children: ReactNode
     },
 ) {
     const page = PLUGIN_SYSTEM.getRoute(props.params.path, RouteEntryPoint.layout);
 
     if (!page) {
-        return props.children;
+        return <>{ props.children }</>;
     }
 
     return <page.component { ...props }>{ props.children }</page.component>;
@@ -25,15 +25,13 @@ export default function Layout(
 /**
  * Generate metadata for the page
  * @param {{path: string[]}} params The list of page parameters
- * @param {SearchParams} searchParams The search parameters
  * @param {ResolvingMetadata} parent The parent metadata
  * @returns {Promise<Metadata>} The metadata for the page
  */
 export async function generateMetadata(
     {
         params,
-        searchParams,
-    }: DynamicRouteParams,
+    }: Omit<DynamicRouteParams, "searchParams">,
     parent: ResolvingMetadata,
 ): Promise<Metadata> {
     const page = PLUGIN_SYSTEM.getRoute(params.path, RouteEntryPoint.layout);
@@ -45,7 +43,7 @@ export async function generateMetadata(
     return (
                typeof page.metadata === "function"
                ? page.metadata({
-                   searchParams,
+                   searchParams: undefined,
                    parent,
                })
                : page.metadata

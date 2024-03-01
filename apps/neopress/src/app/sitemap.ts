@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .filter(definition => !(definition.hide_from_sitemap ?? false))
         .map(definition => ({
             ...definition.sitemap ?? {
-                url:             `${ process.env.NEXT_PUBLIC_BASE_URL }${ definition.route }`,
+                url: `${ process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000/" }${ definition.route }`,
                 changeFrequency: "never",
                 priority:        0.7,
             },

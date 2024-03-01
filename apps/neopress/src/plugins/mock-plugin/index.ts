@@ -12,7 +12,7 @@ import { MockMiddleware } from "./mocks/middleware";
 import { MockPage } from "./mocks/page";
 
 export class MockPlugin extends BasePlugin {
-    public static name = "Mock Plugin";
+    public static plugin_name = "Mock Plugin";
     public static version = "1.0.0";
     public static description = "A sample mock plugin used for testing purposes, remove this before production deployment.";
 
