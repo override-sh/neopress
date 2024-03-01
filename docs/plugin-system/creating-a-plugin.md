@@ -6,13 +6,13 @@ Creating a plugin is as easy as exporting a class implementing the `PluginDefini
 
 One of the most basic plugins is the `MockPlugin` exported from the `@neopress/plugin-mock` package.
 
-As a plugin it is responsible to register each of its fragments into the plugin system, let's examine its implementation below.import {    BasePlugin
+As a plugin it is responsible to register each of its fragments into the plugin system, let's examine its implementation below.import { BasePlugin
 
 <pre class="language-typescript" data-title="MockPlugin" data-line-numbers><code class="lang-typescript"><strong>import { BasePlugin } from "@neopress/plugin-system";
 </strong>// ...
-<strong>
-</strong><strong>export class MockPlugin extends BasePlugin {
-</strong><strong>    public static name = "Mock Plugin";
+
+<strong>export class MockPlugin extends BasePlugin {
+</strong><strong>    public static plugin_name = "Mock Plugin";
 </strong><strong>    public static version = "1.0.0";
 </strong><strong>    public static description = "A sample mock plugin used for testing purposes, remove this before production deployment.";
 </strong>    
@@ -29,7 +29,7 @@ As a plugin it is responsible to register each of its fragments into the plugin 
 
 This is mostly the core of the `MockPlugin` class, let's examine it piece by piece, each plugin must:
 
-* &#x20;Extend the `BasePlugin`
+* Extend the `BasePlugin`
 * Define at least the `name` and `version` static properties, optionally a `description` can be provided
 * Implement the `boot` method where register and initialize all the plugin features
 
@@ -75,7 +75,7 @@ export class MockPlugin extends BasePlugin {
 
 In the `boot` method defined above the mock plugin registers at least one plugin feature of each kind:
 
-* A route accessible at `/mock-page`&#x20;
+* A route accessible at `/mock-page`
 * A series of API routes with their methods, all of them responding to rest requests to the `/api/mock-api` endpoint
 * A series of components, the first named `MockComponent` registered as a simple reusable component for other libraries, the second named `MockComponentHead` that will be auto-injected into the `root.head` position
 * A custom middleware
