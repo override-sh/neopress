@@ -2,7 +2,7 @@
 
 The ground of the whole NeoPress extensibility is its plugin system, freely inspired by the one seen in WordPress, but with many peculiarities.
 
-### The storages
+## The storages
 
 NeoPress plugin system is based on a series of `storages` (aka classes) with controlled access and registration capabilities.&#x20;
 
@@ -10,18 +10,18 @@ The storages are not by default extendable nor is the plugin system natively, th
 
 There are 5 native Storages each with its peculiarities.
 
-#### The `plugin storage`
+### The `plugin storage`
 
 The `plugin storage` is the one responsible for the registration and state management of all the plugins loaded and booted into NeoPress.
 
-#### The `component storage`
+### The `component storage`
 
 The `component storage` keeps track of all the extension components. Components may be used for a large variety of tasks:
 
 * when their `placement` is defined, that is used as a reference to inject them into the defined position
 * when no `placement` is defined, they can be referenced by other plugins or custom features to inject them into arbitrary application positions, much like a dependency injection
 
-#### The `route storage`
+### The `route storage`
 
 The `route storage` is one of the most important, it allows the registration of pages (or views) into the application. Each route is identified as a pair of <mark style="color:yellow;">route definitions</mark> + <mark style="color:orange;">route entrypoint</mark>, in simple words, the <mark style="color:yellow;">route definition</mark> is the actual route at which the page will be rendered (eg. `/example/route`) while the <mark style="color:orange;">route entrypoint</mark> allows you to define the kind of Next.js page you're creating.&#x20;
 
@@ -99,11 +99,11 @@ Currently dynamic path segments (eg. `/sample/[dynamic]/[path]/segments`) are no
 
 Each of the routes can define multiple arguments, including its sitemap definition and its metadata (or metadata generator) more about the available interfaces [here](api/routedefinitioninterface.md).
 
-#### The `API route storage`
+### The `API route storage`
 
 As the name suggests the `API route storage` handles the registration of all the application API routes. Internally it works mostly like the page route but, instead of the entrypoints defined for the `route storage` here is the requirements to define the API method.
 
-#### The `middleware storage`
+### The `middleware storage`
 
 Finally, there's the `middleware storage` for an internal definition of middlewares and their capabilities refer to the [Next.js Official Docs](https://nextjs.org/docs/app/building-your-application/routing/middleware).
 
