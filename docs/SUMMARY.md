@@ -2,9 +2,9 @@
 
 * [NeoPress Overview](README.md)
 * [Folder structure](folder-structure.md)
-* [Plugin system](plugin-system.md)
 
-## API
+## Plugin System
 
-* [RouteEntryPoint](api/routeentrypoint.md)
-* [RouteDefinitionInterface](api/routedefinitioninterface.md)
+* [Overview](plugin-system/overview.md)
+* [Creating a plugin](plugin-system/creating-a-plugin.md)
+* [Installing a plugin](plugin-system/installing-a-plugin.md)

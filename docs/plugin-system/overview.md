@@ -1,4 +1,4 @@
-# Plugin system
+# Overview
 
 The ground of the whole NeoPress extensibility is its plugin system, freely inspired by the one seen in WordPress, but with many peculiarities.
 
@@ -23,69 +23,13 @@ The `component storage` keeps track of all the extension components. Components 
 
 ### The `route storage`
 
-The `route storage` is one of the most important, it allows the registration of pages (or views) into the application. Each route is identified as a pair of <mark style="color:yellow;">route definitions</mark> + <mark style="color:orange;">route entrypoint</mark>, in simple words, the <mark style="color:yellow;">route definition</mark> is the actual route at which the page will be rendered (eg. `/example/route`) while the <mark style="color:orange;">route entrypoint</mark> allows you to define the kind of Next.js page you're creating.&#x20;
+The `route storage` is one of the most important, it allows the registration of pages (or views) into the application. Each route is identified as a pair of `route definitions` + `route entrypoint`, in simple words, the `route definition` is the actual route at which the page will be rendered (eg. `/example/route`) while the `route entrypoint` allows you to define the kind of Next.js page you're creating.&#x20;
 
 <details>
 
 <summary>List of available route entrypoints</summary>
 
-{% code title="route-entrypoint.enum.ts" lineNumbers="true" %}
-```typescript
-/**
- * Define the route entry point, where the route will be rendered.
- *
- * Check the next.js documentation for more information on the entry points:
- * https://nextjs.org/docs/app/api-reference/file-conventions
- */
-export enum RouteEntryPoint {
-    /**
-     * The default entry point for the route, will be rendered in 
-     * "default.tsx" file
-     */
-    default,
-    /**
-     * The error entry point for the route, will be rendered in 
-     * "error.tsx" file
-     */
-    error,
-    /**
-     * The global error entry point for the route, will be rendered in  
-     * "global-error.tsx" file
-     */
-    global_error,
-    /**
-     * The layout entry point for the route, will be rendered in  
-     * "layout.tsx" file
-     */
-    layout,
-    /**
-     * The root layout entry point for the route, will be rendered in  
-     * "layout.tsx" file at the root level
-     */
-    root_layout,
-    /**
-     * The loading entry point for the route, will be rendered in  
-     * "loading.tsx" file
-     */
-    loading,
-    /**
-     * The not found entry point for the route, will be rendered in  
-     * "not-found.tsx" file
-     */
-    not_found,
-    /**
-     * The global not found entry point for the route, will be rendered in  
-     * "not-found.tsx" file at the root level
-     */
-    global_not_found,
-    /**
-     * The page entry point for the route, will be rendered in  
-     * "page.tsx" file
-     */
-    page,
-}
-```
-{% endcode %}
+[Check them on GitHub](https://github.com/override-sh/neopress/blob/main/libs/plugin-system/src/lib/interfaces/route-entrypoint.enum.ts)
 
 </details>
 
@@ -97,7 +41,7 @@ If not specified the default `RouteEntryPoint` will always be considered `RouteE
 Currently dynamic path segments (eg. `/sample/[dynamic]/[path]/segments`) are not supported, but we plan to support them soon to provide a fully featured wrapper around Next.js native functionalities.
 {% endhint %}
 
-Each of the routes can define multiple arguments, including its sitemap definition and its metadata (or metadata generator) more about the available interfaces [here](api/routedefinitioninterface.md).
+Each of the routes can define multiple arguments, including its sitemap definition and its metadata (or metadata generator) more about the available interfaces [here](https://github.com/override-sh/neopress/blob/main/libs/plugin-system/src/lib/interfaces/route-definition.interface.ts).
 
 ### The `API route storage`
 
